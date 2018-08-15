@@ -59,7 +59,7 @@ def train(logic_unit_class=NALU,
             optimizer.step()
 
             if epoch_i % verbose_iterval == 0:
-                print("epoch_i: {}, loss : {:.3f}".format(epoch_i, loss_list[-1]))
+                print("epoch {}, loss : {:.3f}".format(epoch_i, loss_list[-1]))
 
     return {'ad': ad,
             'logic_unit': logic_unit,
@@ -106,8 +106,8 @@ if __name__ == '__main__':
         for i, (X, Y) in enumerate(ad):
             try:
                 total += 1
-                print(f"{desc}, {i}th", end="...")
-                print(f"{func_type}, X: {X.tolist()}, Y: {Y.tolist()}")
+                print(f"{desc}, {i}th, ", end="")
+                print(f"{func_type}, X: {X.tolist()}, Y: {Y.tolist()}", end="...")
                 np.testing.assert_array_almost_equal(Y.numpy(),
                                                      _exec_logic_unit(X),
                                                      decimal=decimal)
@@ -145,5 +145,5 @@ if __name__ == '__main__':
                                  low=low,
                                  high=high)
 
-    print(f"total: {total_inter}, success: {success_inter}, fail: {total_inter-success_inter}")
-    print(f"total: {total_extra}, success: {success_extra}, fail: {total_extra-success_extra}")
+    print(f"Interpolation, total: {total_inter}, success: {success_inter}, fail: {total_inter-success_inter}")
+    print(f"Extrapolation, total: {total_extra}, success: {success_extra}, fail: {total_extra-success_extra}")
