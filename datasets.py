@@ -10,8 +10,8 @@ DIV = 'DIV'
 
 
 def _to_tensor(sample):
-    return (torch.tensor(sample[0], dtype=torch.float),
-            torch.tensor(sample[1], dtype=torch.float))
+    return (torch.tensor(sample[0], dtype=torch.float, requires_grad=False),
+            torch.tensor(sample[1], dtype=torch.float, requires_grad=False))
 
 
 def _gen_add_data(data_size, low=0, high=30):
@@ -63,7 +63,8 @@ class ArithmeticDataset(Dataset):
     def __init__(self, func_type, data_size, low=0, high=30):
         """
         Args:
-            func_type (str): One of arithmetic fuctions.
+            func_type (str): A string from 'ADD', 'SUB', 'MUL', 'DIV',
+                            A specifier of arithmetic fuctions.
             data_size (int): A size of data.
         """
         global _func_dict
